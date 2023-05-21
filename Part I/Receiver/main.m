@@ -135,4 +135,8 @@ xlabel('Sigma')
 ylabel('BER');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BOUNS !!!!!!!!!!!! % sigma = 0.2 0.3 0.4
+sigma_bouns = 0.2 : 0.1 : 0.4;
+number_of_error_in_recieved_noise_bipolar_rz = detect_number_of_errors(signal_4,sigma_bouns,samples_per_bit,bits);
+
 % ________________________END___________________________________
