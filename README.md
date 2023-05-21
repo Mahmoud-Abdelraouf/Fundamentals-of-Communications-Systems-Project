@@ -48,7 +48,7 @@ This project involves the implementation of a line coding system and binary phas
    - `part2_receiver.m`
 4. Follow the instructions provided within each script to run the code and generate the required plots.
 
-Note: The code is designed to be run on MATLAB R2021a or later with the Signal Processing Toolbox installed.
+Note: The code is designed to be run on MATLAB R2021a/octave or later with the Signal Processing Toolbox installed.
 
 ### Acknowledgements
 This project was created as part of a coursework assignment in a digital communication systems course. Theinstructions for the project were provided by the course instructor. The code implementation and README file were prepared by myself as a student. The Signal Processing Toolbox in MATLAB was used extensively in the code implementation.
