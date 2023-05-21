@@ -35,7 +35,7 @@ This project involves the implementation of a line coding system and binary phas
 7. Compare the output of decision level with the generated stream of bits in the transmitter. The comparison is performed by comparing the value of each received bit with the corresponding transmitted bit (step 1) and count number of errors. Then calculate bit error rate (BER) = number of error bits/ Total number of bits.
 
 ### Required Software and Tools
-- MATLAB
+- MATLAB/OCTAVE
 - Signal Processing Toolbox
 
 ### How to Run the Code
@@ -48,7 +48,7 @@ This project involves the implementation of a line coding system and binary phas
    - `part2_receiver.m`
 4. Follow the instructions provided within each script to run the code and generate the required plots.
 
-Note: The code is designed to be run on MATLAB R2021a/octave or later with the Signal Processing Toolbox installed.
+Note: The code is designed to be run on MATLAB R2021a/OCTAVE or later with the Signal Processing Toolbox installed.
 
 ### Acknowledgements
 This project was created as part of a coursework assignment in a digital communication systems course. Theinstructions for the project were provided by the course instructor. The code implementation and README file were prepared by myself as a student. The Signal Processing Toolbox in MATLAB was used extensively in the code implementation.
