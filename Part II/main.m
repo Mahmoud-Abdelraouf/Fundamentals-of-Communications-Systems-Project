@@ -15,6 +15,9 @@ t_bits = linspace(0,Tb*numOfBits,numOfBits);
 % Graph 100 random bits
 figure
 stairs(t_bits, rand_bits);
+title("Generated bits");
+xlabel("n_bits");
+ylabel("bits");
 axis([0 t_bits(end) -0.5 1.5]);
 %%%%%%%%%%%%%%%%%%%%%%%% 2) Polar NRZ coding %%%%%%%%%%%%%%%%%%%%%%%%%
 line_coded_bits = line_code(rand_bits, 1, -1);
@@ -24,6 +27,7 @@ figure
 plot(time,line_coded_bits);
 
 axis([0 length(line_coded_bits)*ts -1.5 1.5]);
+title("Polar NRZ");
 xlabel("Time");
 ylabel("Line coded bits");
 %%%%%%%%%%%%%%%%%%% 3) Plotting the spectral domain %%%%%%%%%%%%%%%%%%%
@@ -45,35 +49,65 @@ title("Polar NRZ power spectrum");
 xlabel("Frequency");
 ylabel("line_coded_power_spectrum");
 %%%%%%%%%%%%%%%%%% 4) BPSK modulation time domain %%%%%%%%%%%%%%%%%%%
-carrier = sin(2*pi*fc*time); % carrier is a sine wave
+% carrier is a sine wave should be multiplied by sqrt(2/Tb)
+carrier = sqrt(2/Tb)*sin(2*pi*fc*time);
+
 BPSK_modulated_signal = line_coded_bits.*carrier; % modulating the signal
 % plotting BPSK_modulated_signal
 figure
 plot(time, BPSK_modulated_signal);
-axis([0 10/fc -1.5 1.5]);
+axis([0 10/fc -15000 15000]);
+title("BPSK modulated signal");
 xlabel("Time");
 ylabel("BPSK_modulated_signal");
 %%%%%%%%%%%%%%%%%%%% 5) Plotting BPSK spectrum %%%%%%%%%%%%%%%%%%%%%%
 BPSK_spectrum = abs(fftshift(fft(BPSK_modulated_signal)));
 figure
 plot(f, BPSK_spectrum);
+title("BPSK Modulated signal spectrum");
 xlabel("frequency");
 ylabel("BPSK_spectrum");
 %%%%%%%%%%%%%%%%%%%%%%%% Part II Receiver %%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%% 6) BPSK demodulation %%%%%%%%%%%%%%%%%%%%%%%%%
 BPSK_demodulated_signal = BPSK_modulated_signal.*carrier;
-y=[];
-for index = 1:200:length(BPSK_demodulated_signal);
- y = [y trapz(time(index:index+199),
-BPSK_demodulated_signal(index:index+199))];
-end
 
+BPSK_demodulated_spectrum = fftshift(fft(BPSK_demodulated_signal))/Ns;
 figure
-reconstructed_bits = line_code(decision(y),1,-1);
+plot(f, abs(BPSK_demodulated_spectrum));
+title("BPSK_demodulated_spectrum");
+xlabel("frequency");
+ylabel("BPSK_demodulated_spectrum");
+
+BPSK_demodulated_spectrum_power = abs(fftshift(fft(BPSK_demodulated_signal)).^2/Ns);
+figure
+plot(f, BPSK_demodulated_spectrum_power);
+title("BPSK_demodulated_spectrum_power");
+xlabel("frequency");
+ylabel("BPSK_demodulated_spectrum_power");
+
+
+LPF = abs(f)<Rb;
+BPSK_LPF = BPSK_demodulated_spectrum .* LPF;
+figure
+plot(f, abs(BPSK_LPF));
+title("BPSK after LPF spectral");
+xlabel("frequency");
+ylabel("BPSK after LPF spectral");
+
+BPSK_LPF_time = real(ifft(ifftshift(BPSK_LPF))*Ns);
+figure
+plot(f, BPSK_LPF_time);
+title("BPSK after LPF time domain");
+xlabel("time");
+ylabel("BPSK LPF signal");
+
+reconstructed_bits = decision(BPSK_LPF_time);
+figure
 plot(time, reconstructed_bits);
-axis([0 length(line_coded_bits)*ts -1.5 1.5]);
-xlabel("Time");
-ylabel("rec");
+title("reconstructed bits after LPF and demodulation");
+ylabel("reconstructed_bits");
+xlabel("time");
 %%%%%%%%%%%%%%%%%%%%%% 7) Calculate BER %%%%%%%%%%%%%%%%%%%%%%%%%
-BER = calculate_ber(line_coded_bits, reconstructed_bits)
+transimitted_bits = line_code(rand_bits, 1,0);
+BER = calculate_ber(transimitted_bits, reconstructed_bits)
 %%%%%%%%%%%%%%%%%%%%%%%%% End Of Main %%%%%%%%%%%%%%%%%%%%%%%%%%%
