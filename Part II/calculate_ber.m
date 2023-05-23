@@ -5,7 +5,7 @@
 function BER = calculate_ber(tx_bits,rx_bits)
   NumOfErrors = 0;
   for index = 1:length(tx_bits);
-    if tx_bits(i) != rx_bits(i)
+    if tx_bits(index) != rx_bits(index)
       NumOfErrors = NumOfErrors +1;
     endif
   endfor
