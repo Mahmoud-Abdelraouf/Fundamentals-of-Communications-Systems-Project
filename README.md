@@ -40,7 +40,7 @@ This project involves the implementation of a line coding system and binary phas
 
 ### How to Run the Code
 1. Clone or download the project repository.
-2. Open MATLAB and navigate to the project directory.
+2. Open MATLAB/OCTAVE and navigate to the project directory.
 3. Run the MATLAB scripts in the following order:
    - `part1_transmitter.m`
    - `part1_receiver.m`
