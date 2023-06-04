@@ -1,7 +1,7 @@
 function ber_values = sweep_sigma_manchester(signal,bits,samples_per_bit)
    N=10000;
-    sigma = linspace(0,1.2,10);
-
+   % sigma = linspace(0,1.2,10);
+     sigma = linspace(0,1.4,10);
     t = linspace(0, length(signal)/samples_per_bit, length(signal));
     ber_values = zeros(1, 10);
 for i = 1:10
