@@ -1,5 +1,5 @@
 % Load the Communications Toolbox package
-pkg load communications
+%pkg load communications
 
 % Generate a sequence of 10000 random bits
 bits = generate_bits(10000);
@@ -37,7 +37,7 @@ xlim([-0.165, 0.5]);
 eyediagram(signal_2, 300,1,1);
 xlim([-0.165, 0.5]);
 %Plot the eye diagram of Unipolar RZ
-eyediagram(signal_3, 300,1,1);
+%eyediagram(signal_3, 300,1,1);
 %Plot the eye diagram of Bipolar RZ
 eyediagram(signal_4, 300,1,1);
 %Plot the eye diagram of Manchester Coding
