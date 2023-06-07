@@ -73,7 +73,8 @@ for i = 1:length(bits)
         waveform((i-1)*samples_per_bit + pulse_width + 1:i*samples_per_bit) = 0;
     else
         % Set the amplitude to zero for a logic low bit
-        waveform((i-1)*samples_per_bit + 1:i*samples_per_bit) = -high_voltage_level;
+        waveform((i-1)*samples_per_bit + 1:(i-1)*samples_per_bit + pulse_width) = -high_voltage_level;
+        waveform((i-1)*samples_per_bit + pulse_width + 1:i*samples_per_bit) = 0;
     end
 end
 
